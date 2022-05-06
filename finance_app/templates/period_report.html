@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    {% if search_time %}
+    <div class="col-6 alert alert-secondary">
+        <div class="row">
+            <div class="col-6 alert-success text-center"><h3>Income: {{ income }} </h3></div>
+            <div class="col-6 alert-danger text-center"><h3>Expens: {{ all_expens }} </h3></div>
+        </div>
+        <hr>
+        <div id="container"></div>
+            <script src="https://code.highcharts.com/highcharts.src.js"></script>
+            <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Expens by category for {{ search_time }}'
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        title: {
+                            text: 'Sum'
+                        }
+                    },
+                    xAxis: {
+                        categories: [
+                          {% for entry in category_expens %}'{{ entry.category__name }} '{% if not forloop.last %}, {% endif %}{% endfor %}
+                        ]
+                    },
+                    series: [{
+                        name: 'Category',
+                        data: [
+                            {% for entry in category_expens %}{{ entry.money_sum }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        ],
+                        dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.0f}'
+                        },
+                        color: 'yellow'
+                    }]
+                });
+            </script>
+        <hr>
+        <div class="">
+            <a class="btn btn-success btn-sm" role="button" href="{% url "period_report" %}">Search again</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-4 alert alert-primary">
+    <h3>Period report</h3>
+        <form role="form" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success btn-sm ">Submit</button>
+        </form>
+    </div>
+    {% endif %}
+{% endblock %}

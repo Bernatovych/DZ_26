@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    <div class="col-4 alert alert-warning">
+        <h3>Delete</h3>
+        <h4>You definitely want to delete: {{ category }}</h4>
+        <form role="form" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <br>
+            <button type="submit" class="btn btn-danger btn-sm ">Yes</button>
+            <a href="{% url 'category_list' %}" class="btn btn-outline-secondary btn-sm" role="button">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

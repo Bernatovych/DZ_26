@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    <div class="col-6">
+        <div class="row">
+            <div class="col-3">
+                <div class=" text-center">
+                    <h1 class="text-center">Today:</h1>
+                    <hr>
+                    <a class="btn btn-primary btn-sm" href="{% url 'category_list' %}"><h4>Category</h4></a>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class=" text-center">
+                    <h1 class="text-success">{{ income }}</h1>
+                    <hr>
+                    <a class="btn btn-success btn-sm" href="{% url 'income_add' %}"><h4>Income +</h4></a>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class=" text-center">
+                    <h1 class="text-danger">{{ expens }}</h1>
+                    <hr>
+                    <a class="btn btn-danger btn-sm" href="{% url 'expens_add' %}"><h4>Expens +</h4></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

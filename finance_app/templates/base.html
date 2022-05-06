@@ -1,0 +1,25 @@
+{% extends 'bootstrap5/bootstrap5.html' %}
+{% load bootstrap5 %}
+
+{% block bootstrap5_content %}
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container">
+            {% if user.is_authenticated %}
+                <div class="navbar-header">
+                    {% if request.path != '/' %}
+                        <a class="navbar-brand" href="{% url 'home' %}">Home |</a>
+                    {% endif %}
+                    {% if request.path != '/period_report/' %}
+                        <a class="navbar-brand" href="{% url 'period_report' %}">Period report |</a>
+                    {% endif %}
+                    <a class="navbar-brand" href="{% url 'logout' %}"><i class="fas fa-user-astronaut">Logout: {{ user.username }} </i> <i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            {% endif %}
+            </div>
+        </nav>
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+        {% block content %}(no content){% endblock %}
+    </div>
+{% endblock %}
+
