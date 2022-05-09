@@ -2,12 +2,11 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <div class="col-12">
     <h3>Category <a class="btn btn-success btn-sm" href="{% url 'category_add' %}">Add</a></h3>
         <hr>
         <div class="row">
         {% for category in object_list %}
-            <div class="col-2">
+            <div class="col-3">
                 <div class="col-12 alert alert-success text-center">
                     <a class="navbar-brand" href="{% url 'category_update' category.pk %}"><h4>{{ category }}</h4></a>
                     <a class="col-12 btn btn-outline-danger btn-sm btn-block" href="{% url 'category_delete' category.pk %}">Delete</a>
@@ -17,5 +16,4 @@
             No category yet.
         {% endfor %}
         </div>
-    </div>
 {% endblock %}

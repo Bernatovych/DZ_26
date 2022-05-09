@@ -3,6 +3,7 @@
 
 {% block bootstrap5_content %}
     <div class="container">
+        <div class="col-6 offset-3">
         <nav class="navbar navbar-default">
             <div class="container">
             {% if user.is_authenticated %}
@@ -20,6 +21,7 @@
         </nav>
         {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
         {% block content %}(no content){% endblock %}
+        </div>
     </div>
 {% endblock %}
 
